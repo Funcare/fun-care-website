@@ -4,8 +4,16 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #FFF4E3; /* your cream color */
-  color: #333;
-  margin: 0;
-  padding: 0;
+  scroll-behavior: smooth;
+  background-color: #FFF4E3;
+  overflow-x: hidden;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.animate-gradientFlow {
+  animation: gradientFlow 5s linear infinite alternate;
 }
