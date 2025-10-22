@@ -10,6 +10,7 @@ export default {
         teal: "#90B7B3",
         coral: "#E59BAA",
         cream: "#FFF4E3",
+        yellow: "#FFD166",
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
