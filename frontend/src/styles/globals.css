@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #FFF4E3; /* your cream color */
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
