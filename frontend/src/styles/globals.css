@@ -5,15 +5,94 @@
 body {
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
-  background-color: #FFF4E3;
+  background-color: #FAF3E0; /* light yellow-bronze tone */
+  color: #512867; /* main text color - deep violet */
   overflow-x: hidden;
 }
 
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+/* ------------------------------
+   Simplified Theme Classes
+   (Single-Color Visual System)
+--------------------------------*/
+
+.text-primary {
+  color: #512867; /* violet */
 }
 
-.animate-gradientFlow {
-  animation: gradientFlow 5s linear infinite alternate;
+.text-accent {
+  color: #8EA22D; /* olive */
+}
+
+.bg-primary {
+  background-color: #512867; /* violet */
+}
+
+.bg-secondary {
+  background-color: #8EA22D; /* olive */
+}
+
+.bg-accent {
+  background-color: #9A6D46; /* bronze */
+}
+
+/* ------------------------------
+   Optional Light Variants
+--------------------------------*/
+
+.text-primary-light {
+  color: #7A4C91; /* violetLight */
+}
+
+.text-accent-light {
+  color: #B3C865; /* oliveLight */
+}
+
+.bg-primary-light {
+  background-color: #7A4C91; /* violetLight */
+}
+
+.bg-secondary-light {
+  background-color: #B3C865; /* oliveLight */
+}
+
+/* ------------------------------
+   Remove old rainbow animation
+   (keeping code clean and modern)
+--------------------------------*/
+
+/* .animate-gradientFlow {
+  background: linear-gradient(
+    270deg,
+    #9A6D46,
+    #76285A,
+    #512867,
+    #49637A,
+    #8EA22D
+  );
+  background-size: 400% 400%;
+  animation: gradientFlow 8s ease infinite alternate;
+} */
+
+/* --------------------------------
+   Clean Section Background Options
+----------------------------------- */
+
+.section-bg-neutral {
+  background-color: #FAF3E0; /* light yellow-bronze tone */
+}
+
+.section-bg-violet {
+  background-color: #512867;
+}
+
+.section-bg-olive {
+  background-color: #8EA22D;
+}
+
+.section-bg-bronze {
+  background-color: #9A6D46;
+}
+
+.section-bg-steel {
+  background-color: #49637A;
 }
