@@ -1,18 +1,23 @@
 "use client";
+
 import { motion } from "framer-motion";
-import FloatingShapes from "./FloatingShapes";
 
 export default function HeroSection() {
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-center"
       style={{
-        background: "linear-gradient(135deg, #C49B73, #9A6D46, #7A4C91)",
-        backgroundAttachment: "scroll", // smoother on scroll
-        willChange: "transform", // GPU hint
+        backgroundImage: `url('/images/bulb.png')`,
+        backgroundSize: "100%",            // smaller image
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center -160px", // move image downward
       }}
     >
-      <FloatingShapes />
+      {/* Darken ONLY the image */}
+      <div className="absolute inset-0 bg-black/0"></div>
+
+      {/* Soft gradient on top (not darker) */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FFD166]/70 via-[#90B7B3]/40 to-[#FFD166]/70 pointer-events-none"></div>
 
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -21,9 +26,9 @@ export default function HeroSection() {
         viewport={{ once: true }}
         className="relative z-10 px-6"
       >
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-4 leading-tight drop-shadow-md">
+        <h1 className="text-5xl md:text-7xl font-extrabold text-gray-800 mb-4 leading-tight drop-shadow-md">
           Engage Teams. Elevate Culture.{" "}
-          <span className="text-white/80">Experience FunCare</span>
+          <span className="text-gray-800">Experience FunCare</span>
         </h1>
 
         <motion.p
@@ -31,27 +36,38 @@ export default function HeroSection() {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto text-lg md:text-xl text-white/90 mb-10"
+          className="max-w-3xl mx-auto text-lg md:text-xl text-gray-800 mb-10"
         >
           We integrate{" "}
-          <span className="font-semibold text-white">joy and care models</span>{" "}
+          <span className="font-semibold text-gray-800">joy and care models</span>{" "}
           to connect teams to{" "}
-          <span className="font-semibold text-white">innovate, learn, and lead.</span>
+          <span className="font-semibold text-gray-800">innovate, learn, and lead.</span>
         </motion.p>
 
-        <motion.a
-          whileHover={{
-            scale: 1.1,
-            boxShadow: "0 0 30px rgba(255,255,255,0.4)",
-            backgroundColor: "#FFFFFF",
-            color: "#512867",
-          }}
-          whileTap={{ scale: 0.95 }}
-          href="#programs"
-          className="bg-[#FAF3E0] text-violet font-semibold px-10 py-4 rounded-full text-lg shadow-lg transition-all"
-        >
-          Become a FunCare Institute Champion
-        </motion.a>
+        <div className="relative w-full h-70 flex justify-center items-start mt-10">
+          <motion.a
+            whileHover={{
+              scale: 1.07,
+              background: "rgba(229, 155, 170, 0.45)",
+              backdropFilter: "blur(8px)",
+              boxShadow: "0 0 35px rgba(229, 155, 170, 0.6)",
+            }}
+            whileTap={{ scale: 0.96 }}
+            style={{ transformOrigin: "center" }}
+            href="#programs"
+            className="
+              px-10 py-5 text-lg font-extrabold
+              rounded-xl
+              text-gray-800
+              border-2 border-gray-700
+              transition-all duration-300
+              bg-transparent
+              shadow-md
+            "
+          >
+            Become a FunCare Institute Champion
+          </motion.a>
+        </div>
       </motion.div>
     </section>
   );

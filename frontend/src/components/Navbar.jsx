@@ -25,49 +25,40 @@ export default function Navbar() {
       }`}
       style={{
         background:
-          "linear-gradient(90deg, #9A6D46, #76285A, #512867, #49637A, #8EA22D)",
+          "linear-gradient(90deg, #FFF4E3, #E59BAA, #FFF4E3)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-3 grid grid-cols-3 items-center">
-        {/* Left: Logo */}
-        <div className="flex justify-start items-center gap-3">
+      <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+        {/* Left: Logo + Name */}
+        <div className="flex items-center gap-3">
           <Image
             src={Logo}
             alt="FunCare Logo"
-            width={50}
-            height={50}
+            width={80}
+            height={80}
             className="rounded-full"
           />
-          <h1 className="text-2xl font-extrabold text-white tracking-tight drop-shadow-md">
-            FunCare
-          </h1>
+          <h1
+  className="text-2xl font-medium text-gray-800 tracking-tight uppercase"
+  style={{ fontFamily: "'Turret Road', sans-serif" }}
+>
+  Fun Care Institute.
+</h1>
         </div>
 
-        {/* Center: Navigation Links */}
-        <ul className="hidden md:flex justify-center space-x-10 text-white font-medium">
+        {/* Right: Navigation Links */}
+        <ul className="hidden md:flex space-x-10 text-gray-800 font-medium">
           {["About", "Programs", "Resources", "Contact"].map((item) => (
             <motion.li key={item} whileHover={{ scale: 1.1 }}>
               <a
                 href={`#${item.toLowerCase()}`}
-                className="hover:text-oliveLight transition-colors relative"
+                className="hover:text-[#E59BAA] transition-colors relative"
               >
                 {item}
               </a>
             </motion.li>
           ))}
         </ul>
-
-        {/* Right: CTA Button */}
-        <div className="flex justify-end">
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="#join"
-            className="hidden md:block bg-[#FAF3E0] text-violetLight font-semibold px-4 py-2 rounded-full shadow-md hover:bg-violetLight hover:text-white transition-all"
-          >
-            Become a Funcare Institute Champion
-          </motion.a>
-        </div>
       </div>
     </motion.nav>
   );

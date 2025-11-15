@@ -15,11 +15,9 @@ export default function AboutSection() {
     offset: ["start end", "end start"],
   });
 
-  // Parallax motion for video
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], [0, 1, 1, 0]);
 
-  // Pulse animation for the accent blur circle
   const pulse = {
     scale: [1, 1.05, 1],
     opacity: [0.3, 0.6, 0.3],
@@ -30,7 +28,6 @@ export default function AboutSection() {
     },
   };
 
-  // Hover play/pause for video
   const handleMouseEnter = () => {
     setIsHovered(true);
     videoRef.current?.pause();
@@ -44,20 +41,23 @@ export default function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="relative py-24 overflow-hidden text-violet"
+      className="relative py-24 overflow-hidden text-gray-800"
       style={{
-        background: "linear-gradient(120deg, #B3C865, #8EA22D)",
-        backgroundSize: "200% 200%",
+        backgroundImage: "url('/images/bulb2.png'), linear-gradient(120deg, #90B7B3, #FFF4E3, #90B7B3)",
+        backgroundSize: "50%, 200% 200%",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "-80% center, 0% 50%",
         animation: "gradientFlow 18s ease infinite alternate",
       }}
     >
+      <div className="absolute inset-0 bg-white/50 pointer-events-none"></div>
       <style jsx>{`
         @keyframes gradientFlow {
           0% {
-            background-position: 0% 50%;
+            background-position: -50% center, 0% 50%;
           }
           100% {
-            background-position: 100% 50%;
+            background-position: -50% center, 100% 50%;
           }
         }
       `}</style>
@@ -67,7 +67,7 @@ export default function AboutSection() {
 
       {/* Soft Pulse Accent Behind Title */}
       <motion.div
-        className="absolute top-40 left-1/2 -translate-x-1/2 w-72 h-72 bg-plum/30 rounded-full blur-3xl"
+        className="absolute top-40 left-1/2 -translate-x-1/2 w-72 h-72 bg-coral/30 rounded-full blur-3xl"
         animate={pulse}
       />
 
@@ -79,60 +79,60 @@ export default function AboutSection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-violet mb-8 relative z-10">
-            About <span className="text-plum">FunCare</span>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 relative z-10">
+            About <span className="text-gray-800">FunCare</span>
           </h2>
 
           {[
             <>
               In today’s fast-paced workplace, burnout, disconnection and cultural divides
               diminish creativity, trust and performance.{" "}
-              <span className="relative group cursor-pointer text-plum font-semibold">
+              <span className="relative group cursor-pointer text-gray-700 font-semibold">
                 FUNCARE
-                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-bronze transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-gray-500 transition-all duration-300"></span>
               </span>{" "}
               is the antidote to friction and fatigue in the workplace.
             </>,
             <>
               We bring{" "}
-              <span className="relative group cursor-pointer text-bronze font-semibold">
+              <span className="relative group cursor-pointer text-gray-700 font-semibold">
                 play-based learning
-                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-plum transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-gray-500 transition-all duration-300"></span>
               </span>
               ,{" "}
-              <span className="relative group cursor-pointer text-plum font-semibold">
+              <span className="relative group cursor-pointer text-gray-700 font-semibold">
                 creative expression
-                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-bronze transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-gray-500 transition-all duration-300"></span>
               </span>{" "}
               and{" "}
-              <span className="relative group cursor-pointer text-bronze font-semibold">
+              <span className="relative group cursor-pointer text-gray-700 font-semibold">
                 collective care
-                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-plum transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-gray-500 transition-all duration-300"></span>
               </span>{" "}
               into the rhythm of work to renew wellbeing and engagement.
             </>,
             <>
               When people feel connected and cared for, performance follows. Grounded in research on{" "}
-              <span className="relative group cursor-pointer text-plum font-semibold">
+              <span className="relative group cursor-pointer text-gray-700 font-semibold">
                 joy pedagogy
-                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-bronze transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-gray-500 transition-all duration-300"></span>
               </span>
               ,{" "}
-              <span className="relative group cursor-pointer text-bronze font-semibold">
+              <span className="relative group cursor-pointer text-gray-700 font-semibold">
                 co-creation
-                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-plum transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-gray-500 transition-all duration-300"></span>
               </span>{" "}
               and{" "}
-              <span className="relative group cursor-pointer text-plum font-semibold">
+              <span className="relative group cursor-pointer text-gray-700 font-semibold">
                 organizational wellbeing
-                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-bronze transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-0 w-0 group-hover:w-full h-0.5 bg-gray-500 transition-all duration-300"></span>
               </span>
               , FUNCARE programs help individuals and teams build cultures of engagement, creativity and care—boosting employee satisfaction, innovation and productivity.
             </>,
           ].map((text, i) => (
             <motion.p
               key={i}
-              className="text-lg text-violet leading-relaxed mb-5"
+              className="text-lg text-gray-700 leading-relaxed mb-5"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2, duration: 0.7 }}
@@ -144,9 +144,23 @@ export default function AboutSection() {
 
           {/* CTA Button */}
           <motion.a
-            whileHover={{ scale: 1.05 }}
+            whileHover={{
+              scale: 1.07,
+              background: "rgba(229, 155, 170, 0.45)",
+              backdropFilter: "blur(8px)",
+              boxShadow: "0 0 35px rgba(229, 155, 170, 0.6)",
+            }}
             href="#programs"
-            className="inline-block bg-violet text-white px-8 py-3 rounded-full font-semibold shadow-md hover:bg-violetLight transition-colors mt-4"
+            className="
+              px-8 py-2 text-lg font-extrabold
+              rounded-xl
+              text-gray-800
+              border-2 border-gray-700
+              transition-all duration-300
+              bg-transparent
+              shadow-md
+              mt-4
+            "
           >
             Explore Our Programs
           </motion.a>
@@ -157,7 +171,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="mt-10 p-6 bg-white/80 backdrop-blur-md rounded-xl shadow-md border border-violet/10"
+            className="mt-10 p-6 bg-white/80 backdrop-blur-md rounded-xl shadow-md border border-teal/10"
           >
             <div className="flex items-start gap-4">
               <Image
@@ -167,10 +181,10 @@ export default function AboutSection() {
                 height={36}
                 className="drop-shadow-md"
               />
-              <p className="text-violet text-base leading-relaxed">
+              <p className="text-gray-700 text-base leading-relaxed">
                 <span className="font-semibold">Did you know?</span> FunCare’s programs are rooted in
-                research on <span className="text-plum font-semibold">joy pedagogy</span> and{" "}
-                <span className="text-bronze font-semibold">collective wellbeing</span> — bridging the
+                research on <span className="text-gray-700 font-semibold">joy pedagogy</span> and{" "}
+                <span className="text-gray-700 font-semibold">collective wellbeing</span> — bridging the
                 gap between creativity and care at work.
               </p>
             </div>
@@ -210,7 +224,7 @@ export default function AboutSection() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered ? 0.3 : 0 }}
-              className="absolute inset-0 bg-violet/40 backdrop-blur-sm transition-all duration-300"
+              className="absolute inset-0 bg-teal/40 backdrop-blur-sm transition-all duration-300"
             />
           </motion.div>
         </Tilt>
@@ -218,11 +232,11 @@ export default function AboutSection() {
 
       {/* Motion trail line */}
       <motion.div
-        className="absolute bottom-10 left-0 right-0 h-px bg-gradient-to-r from-transparent via-plum/50 to-transparent"
+        className="absolute bottom-10 left-0 right-0 h-px bg-gradient-to-r from-transparent via-coral/50 to-transparent"
         style={{ scaleX: useSpring(useMotionValue(1), { stiffness: 50, damping: 20 }) }}
         animate={{ opacity: [0.3, 0.8, 0.3] }}
         transition={{ duration: 3, repeat: Infinity }}
       />
     </section>
   );
-}
+} 

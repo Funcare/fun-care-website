@@ -5,8 +5,8 @@
 body {
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
-  background-color: #FAF3E0; /* light yellow-bronze tone */
-  color: #512867; /* main text color - deep violet */
+  background-color: #FFF4E3; /* cream */
+  color: #90B7B3; /* teal for main text */
   overflow-x: hidden;
 }
 
@@ -16,23 +16,23 @@ body {
 --------------------------------*/
 
 .text-primary {
-  color: #512867; /* violet */
+  color: #90B7B3; /* teal */
 }
 
 .text-accent {
-  color: #8EA22D; /* olive */
+  color: #E59BAA; /* coral */
 }
 
 .bg-primary {
-  background-color: #512867; /* violet */
+  background-color: #90B7B3; /* teal */
 }
 
 .bg-secondary {
-  background-color: #8EA22D; /* olive */
+  background-color: #E59BAA; /* coral */
 }
 
 .bg-accent {
-  background-color: #9A6D46; /* bronze */
+  background-color: #F3C6A4; /* peach */
 }
 
 /* ------------------------------
@@ -40,59 +40,41 @@ body {
 --------------------------------*/
 
 .text-primary-light {
-  color: #7A4C91; /* violetLight */
+  color: #B7D1CD; /* lighter teal tone */
 }
 
 .text-accent-light {
-  color: #B3C865; /* oliveLight */
+  color: #F3C6A4; /* peach */
 }
 
 .bg-primary-light {
-  background-color: #7A4C91; /* violetLight */
+  background-color: #B7D1CD; /* lighter teal tone */
 }
 
 .bg-secondary-light {
-  background-color: #B3C865; /* oliveLight */
+  background-color: #F3C6A4; /* peach */
 }
-
-/* ------------------------------
-   Remove old rainbow animation
-   (keeping code clean and modern)
---------------------------------*/
-
-/* .animate-gradientFlow {
-  background: linear-gradient(
-    270deg,
-    #9A6D46,
-    #76285A,
-    #512867,
-    #49637A,
-    #8EA22D
-  );
-  background-size: 400% 400%;
-  animation: gradientFlow 8s ease infinite alternate;
-} */
 
 /* --------------------------------
    Clean Section Background Options
 ----------------------------------- */
 
 .section-bg-neutral {
-  background-color: #FAF3E0; /* light yellow-bronze tone */
+  background-color: #FFF4E3; /* cream */
 }
 
-.section-bg-violet {
-  background-color: #512867;
+.section-bg-teal {
+  background-color: #90B7B3; /* teal */
 }
 
-.section-bg-olive {
-  background-color: #8EA22D;
+.section-bg-coral {
+  background-color: #E59BAA; /* coral */
 }
 
-.section-bg-bronze {
-  background-color: #9A6D46;
+.section-bg-peach {
+  background-color: #F3C6A4; /* peach */
 }
 
-.section-bg-steel {
-  background-color: #49637A;
+.section-bg-yellow {
+  background-color: #FFD166; /* yellow */
 }
