@@ -16,3 +16,5 @@ out/
 dist/
 
 backend/.envbackend/.env
+
+backend/.env
