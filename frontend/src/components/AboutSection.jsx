@@ -41,12 +41,12 @@ export default function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="relative py-24 overflow-hidden text-gray-800"
+      className="relative py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden text-gray-800"
       style={{
         backgroundImage: "url('/images/bulb2.png'), linear-gradient(120deg, #90B7B3, #FFF4E3, #90B7B3)",
         backgroundSize: "50%, 200% 200%",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "-80% center, 0% 50%",
+        backgroundPosition: "-45% center, 0% 50%",
         animation: "gradientFlow 18s ease infinite alternate",
       }}
     >
@@ -54,10 +54,58 @@ export default function AboutSection() {
       <style jsx>{`
         @keyframes gradientFlow {
           0% {
-            background-position: -50% center, 0% 50%;
+            background-position: -45% center, 0% 50%;
           }
           100% {
-            background-position: -50% center, 100% 50%;
+            background-position: -45% center, 100% 50%;
+          }
+        }
+        @media (max-width: 640px) {
+          section {
+            background-size: 140%, 200% 200% !important;
+            background-position: center -40px, 0% 50% !important;
+          }
+          @keyframes gradientFlow {
+            0% {
+              background-position: center -40px, 0% 50%;
+            }
+            100% {
+              background-position: center -40px, 100% 50%;
+            }
+          }
+        }
+        @media (min-width: 641px) and (max-width: 768px) {
+          section {
+            background-size: 120%, 200% 200% !important;
+            background-position: center center, 0% 50% !important;
+          }
+          @keyframes gradientFlow {
+            0% {
+              background-position: center center, 0% 50%;
+            }
+            100% {
+              background-position: center center, 100% 50%;
+            }
+          }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+          section {
+            background-size: 60%, 200% 200% !important;
+            background-position: -40% center, 0% 50% !important;
+          }
+          @keyframes gradientFlow {
+            0% {
+              background-position: -40% center, 0% 50%;
+            }
+            100% {
+              background-position: -40% center, 100% 50%;
+            }
+          }
+        }
+        @media (min-width: 1025px) {
+          section {
+            background-size: 50%, 200% 200% !important;
+            background-position: -45% center, 0% 50% !important;
           }
         }
       `}</style>
@@ -67,11 +115,11 @@ export default function AboutSection() {
 
       {/* Soft Pulse Accent Behind Title */}
       <motion.div
-        className="absolute top-40 left-1/2 -translate-x-1/2 w-72 h-72 bg-coral/30 rounded-full blur-3xl"
+        className="absolute top-20 sm:top-32 md:top-40 left-1/2 -translate-x-1/2 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-coral/30 rounded-full blur-3xl"
         animate={pulse}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
         {/* Left: Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -79,7 +127,7 @@ export default function AboutSection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-8 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-6 sm:mb-8 relative z-10">
             About <span className="text-gray-800">FunCare</span>
           </h2>
 
@@ -132,7 +180,7 @@ export default function AboutSection() {
           ].map((text, i) => (
             <motion.p
               key={i}
-              className="text-lg text-gray-700 leading-relaxed mb-5"
+              className="text-base sm:text-lg text-gray-700 leading-relaxed mb-4 sm:mb-5"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2, duration: 0.7 }}
@@ -152,7 +200,8 @@ export default function AboutSection() {
             }}
             href="#programs"
             className="
-              px-8 py-2 text-lg font-extrabold
+              px-6 py-2 sm:px-8 sm:py-2 
+              text-base sm:text-lg font-extrabold
               rounded-xl
               text-gray-800
               border-2 border-gray-700
@@ -160,6 +209,7 @@ export default function AboutSection() {
               bg-transparent
               shadow-md
               mt-4
+              inline-block
             "
           >
             Explore Our Programs
@@ -171,18 +221,18 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="mt-10 p-6 bg-white/80 backdrop-blur-md rounded-xl shadow-md border border-teal/10"
+            className="mt-8 sm:mt-10 p-4 sm:p-6 bg-white/80 backdrop-blur-md rounded-xl shadow-md border border-teal/10"
           >
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-3 sm:gap-4">
               <Image
                 src="/icons/idea-icon.png"
                 alt="Idea Icon"
-                width={36}
-                height={36}
-                className="drop-shadow-md"
+                width={32}
+                height={32}
+                className="drop-shadow-md sm:w-9 sm:h-9 flex-shrink-0"
               />
-              <p className="text-gray-700 text-base leading-relaxed">
-                <span className="font-semibold">Did you know?</span> FunCare’s programs are rooted in
+              <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+                <span className="font-semibold">Did you know?</span> FunCare's programs are rooted in
                 research on <span className="text-gray-700 font-semibold">joy pedagogy</span> and{" "}
                 <span className="text-gray-700 font-semibold">collective wellbeing</span> — bridging the
                 gap between creativity and care at work.
@@ -217,7 +267,7 @@ export default function AboutSection() {
               loop
               autoPlay
               playsInline
-              className="object-cover w-full h-[420px] md:h-[580px]"
+              className="object-cover w-full h-[280px] sm:h-[350px] md:h-[420px] lg:h-[580px]"
             />
 
             {/* Hover overlay */}

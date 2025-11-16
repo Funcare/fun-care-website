@@ -39,40 +39,42 @@ export default function AIChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       {/* Floating Button */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="bg-coral text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center 
+          className="bg-coral text-white w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-lg flex items-center justify-center 
                      hover:bg-peach transition transform hover:scale-110"
+          aria-label="Open chat"
         >
-          <MessageCircle size={30} />
+          <MessageCircle size={24} className="sm:w-8 sm:h-8" />
         </button>
       )}
 
       {/* Chat Window */}
       {open && (
         <div
-          className="w-80 h-96 bg-cream shadow-2xl rounded-2xl flex flex-col border border-peach 
-                     animate-fadeIn"
+          className="w-[calc(100vw-2rem)] sm:w-80 h-[calc(100vh-8rem)] sm:h-96 max-h-[600px] bg-cream shadow-2xl rounded-2xl flex flex-col border border-peach 
+                     animate-fadeIn fixed bottom-4 right-4 sm:bottom-6 sm:right-6 sm:relative sm:bottom-auto sm:right-auto"
         >
           {/* Header */}
           <div
-            className="bg-gradient-to-r from-peach to-coral text-white p-4 flex justify-between 
+            className="bg-gradient-to-r from-peach to-coral text-white p-3 sm:p-4 flex justify-between 
                        items-center rounded-t-2xl shadow-md"
           >
-            <span className="font-semibold">FunCare AI Assistant</span>
+            <span className="font-semibold text-sm sm:text-base">FunCare AI Assistant</span>
             <button
               onClick={() => setOpen(false)}
-              className="hover:text-yellow transition"
+              className="hover:text-yellow transition p-1"
+              aria-label="Close chat"
             >
-              <X size={22} />
+              <X size={20} className="sm:w-6 sm:h-6" />
             </button>
           </div>
 
           {/* Messages */}
-<div className="flex-1 p-4 overflow-y-auto space-y-3">
+<div className="flex-1 p-3 sm:p-4 overflow-y-auto space-y-2 sm:space-y-3">
   {messages.map((msg, i) => {
     const isAI = msg.sender === "ai";
 
@@ -95,7 +97,7 @@ export default function AIChatWidget() {
     return (
       <div
         key={i}
-        className={`p-3 rounded-xl max-w-[80%] text-sm shadow-sm ${
+        className={`p-2 sm:p-3 rounded-xl max-w-[85%] sm:max-w-[80%] text-xs sm:text-sm shadow-sm ${
           msg.sender === "user"
             ? "bg-teal text-white ml-auto"
             : "bg-white text-gray-800 border border-gray-300"
@@ -119,7 +121,7 @@ export default function AIChatWidget() {
                 {/* Inline button */}
                 <button
                   onClick={() => (window.location.href = buttonPath)}
-                  className="bg-teal text-white px-3 py-1.5 rounded-lg shadow hover:bg-teal/80 transition inline-block"
+                  className="bg-teal text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg shadow hover:bg-teal/80 transition inline-block text-xs sm:text-sm"
                 >
                   {buttonLabel}
                 </button>
@@ -139,22 +141,22 @@ export default function AIChatWidget() {
   })}
 
   {loading && (
-    <div className="text-gray-500 text-sm italic">AI is typing…</div>
+    <div className="text-gray-500 text-xs sm:text-sm italic">AI is typing…</div>
   )}
 </div>
 
           {/* Input */}
-          <div className="p-3 border-t border-gray-300 flex gap-2 bg-white rounded-b-2xl">
+          <div className="p-2 sm:p-3 border-t border-gray-300 flex gap-2 bg-white rounded-b-2xl">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-              className="flex-1 border border-gray-300 bg-gray-100 rounded-xl p-2 outline-none text-gray-700 placeholder-gray-400"
+              className="flex-1 border border-gray-300 bg-gray-100 rounded-xl p-2 sm:p-2.5 outline-none text-gray-700 placeholder-gray-400 text-sm sm:text-base"
               placeholder="Ask something..."
             />
             <button
               onClick={sendMessage}
-              className="bg-teal text-white px-4 py-2 rounded-xl hover:bg-teal/80 transition"
+              className="bg-teal text-white px-3 py-2 sm:px-4 sm:py-2 rounded-xl hover:bg-teal/80 transition text-sm sm:text-base whitespace-nowrap"
             >
               Send
             </button>

@@ -39,7 +39,7 @@ export default function ProgramsSection() {
   return (
     <section
       id="programs"
-      className="py-24 relative overflow-hidden text-gray-800"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden text-gray-800"
       style={{
         background: "linear-gradient(120deg, #F3C6A4, #FFF4E3, #F3C6A4)",
         backgroundSize: "200% 200%",
@@ -47,12 +47,11 @@ export default function ProgramsSection() {
       }}
     >
       <div
-        className="absolute top-[-95px] right-[-300px] w-[900px] h-[900px] -translate-y-1/2 pointer-events-none"
+        className="bulb-bg-programs absolute pointer-events-none"
         style={{
           backgroundImage: "url('/images/bulb2.png')",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
-          transform: "rotate(180deg)",
           opacity: 0.50,
         }}
       ></div>
@@ -65,47 +64,81 @@ export default function ProgramsSection() {
             background-position: 100% 50%;
           }
         }
+        .bulb-bg-programs {
+          top: 25%;
+          right: -300px;
+          width: 900px;
+          height: 900px;
+          transform: translateY(-50%) rotate(180deg);
+        }
+        @media (max-width: 640px) {
+          .bulb-bg-programs {
+            top: 25%;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            transform: translateY(-50%) rotate(180deg);
+          }
+        }
+        @media (min-width: 641px) and (max-width: 768px) {
+          .bulb-bg-programs {
+            top: 25%;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            transform: translateY(-50%) rotate(180deg);
+          }
+        }
+        @media (min-width: 769px) {
+          .bulb-bg-programs {
+            top: 25%;
+            right: -300px;
+            width: 900px;
+            height: 900px;
+            transform: translateY(-50%) rotate(180deg);
+          }
+        }
       `}</style>
 
       {/* header */}
-      <div className="max-w-7xl mx-auto px-6 text-center mb-16">
-        <h2 className="text-4xl font-extrabold mb-4 text-gray-800 drop-shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center mb-10 sm:mb-12 md:mb-16">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 text-gray-800 drop-shadow-sm">
           Our Programs
         </h2>
-        <p className="text-gray-700 max-w-2xl mx-auto">
+        <p className="text-gray-700 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-4">
           Explore our transformative learning experiences designed to spark
           creativity, empathy, and innovation.
         </p>
       </div>
 
       {/* 2×2 grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto px-4 sm:px-6">
         {programs.map((p, i) => (
           <Tilt key={i} tiltMaxAngleX={8} tiltMaxAngleY={8}>
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 180 }}
-              className={`${p.color} p-8 rounded-2xl shadow-lg hover:shadow-2xl flex flex-col justify-between transition-all`}
+              className={`${p.color} p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl flex flex-col justify-between transition-all`}
             >
               <div>
-                <div className="flex justify-center mb-4">
+                <div className="flex justify-center mb-3 sm:mb-4">
                   <Image
                     src={p.icon}
                     alt={p.title}
-                    width={80}
-                    height={80}
-                    className="drop-shadow-lg transition-transform duration-300 hover:scale-110"
+                    width={60}
+                    height={60}
+                    className="drop-shadow-lg transition-transform duration-300 hover:scale-110 sm:w-20 sm:h-20"
                   />
                 </div>
-                <h3 className="text-2xl font-bold mb-3 text-center text-gray-800">
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-center text-gray-800">
                   {p.title}
                 </h3>
-                <p className="text-sm opacity-90 leading-relaxed text-center text-gray-700">
+                <p className="text-xs sm:text-sm opacity-90 leading-relaxed text-center text-gray-700">
                   {p.desc}
                 </p>
               </div>
 
-              <div className="mt-6 flex justify-center">
+              <div className="mt-4 sm:mt-6 flex justify-center">
                 <motion.a
                   href={p.link}
                   whileHover={{
@@ -119,10 +152,11 @@ export default function ProgramsSection() {
                     mt-auto inline-block
                     bg-transparent
                     text-gray-800 font-semibold
-                    px-6 py-3
+                    px-5 py-2 sm:px-6 sm:py-3
                     rounded-md
                     border border-gray-700
                     transition-all duration-300
+                    text-sm sm:text-base
                   "
                 >
                   Learn More

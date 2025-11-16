@@ -29,7 +29,7 @@ export default function Footer() {
     >
 
       <div
-        className="absolute bottom-[-150px] left-[-120px] w-[650px] h-[650px] pointer-events-none"
+        className="bulb-bg-footer absolute pointer-events-none"
         style={{
           backgroundImage: "url('/images/bulb2.png')",
           backgroundSize: "contain",
@@ -38,6 +38,38 @@ export default function Footer() {
           transform: "rotate(40deg)",
         }}
       ></div>
+      <style jsx>{`
+        .bulb-bg-footer {
+          bottom: -150px;
+          left: -120px;
+          width: 650px;
+          height: 650px;
+        }
+        @media (max-width: 640px) {
+          .bulb-bg-footer {
+            bottom: 400px;
+            left: 20px;
+            width: 400px;
+            height: 400px;
+          }
+        }
+        @media (min-width: 641px) and (max-width: 768px) {
+          .bulb-bg-footer {
+            bottom: 10px;
+            left: -60px;
+            width: 500px;
+            height: 500px;
+          }
+        }
+        @media (min-width: 769px) {
+          .bulb-bg-footer {
+            bottom: -150px;
+            left: -120px;
+            width: 650px;
+            height: 650px;
+          }
+        }
+      `}</style>
 
       {/* Glow Overlay */}
       <div className="absolute inset-0 bg-white/10 mix-blend-overlay"></div>
@@ -47,11 +79,11 @@ export default function Footer() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12"
       >
         {/* Brand Info */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4">
             <Image
               src="/icons/WebsiteLogo.png"
               alt="FunCare Logo"
@@ -60,14 +92,14 @@ export default function Footer() {
               className="rounded-full drop-shadow-md"
             />
             <h1
-              className="text-2xl font-medium text-gray-800 tracking-tight uppercase drop-shadow-md"
+              className="text-xl sm:text-2xl font-medium text-gray-800 tracking-tight uppercase drop-shadow-md"
               style={{ fontFamily: "'Turret Road', sans-serif" }}
             >
               Fun Care Institute.
             </h1>
           </div>
 
-          <p className="text-gray-700 mb-4 leading-relaxed">
+          <p className="text-gray-700 mb-4 leading-relaxed text-sm sm:text-base">
             Engage Teams. Elevate Culture. Experience FunCare
           </p>
           <div className="flex space-x-4 mt-6">
@@ -85,7 +117,7 @@ export default function Footer() {
                 whileTap={{ scale: 0.95 }}
                 className="p-2 bg-white/20 rounded-full shadow-md hover:bg-white/40 transition-all"
               >
-                <Icon className="w-6 h-6 text-gray-800 stroke-[1.6]" />
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 stroke-[1.6]" />
               </motion.a>
             ))}
           </div>
@@ -93,8 +125,8 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-bold mb-4 text-gray-800">Quick Links</h3>
-          <ul className="space-y-2 text-gray-700">
+          <h3 className="text-base sm:text-lg font-bold mb-4 text-gray-800">Quick Links</h3>
+          <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
             {["About", "Programs", "Courses", "Resources", "Contact"].map((item) => (
               <li key={item}>
                 <a
@@ -110,21 +142,21 @@ export default function Footer() {
 
         {/* Contact */}
         <div>
-          <h3 className="text-lg font-bold mb-4 text-gray-800">Contact Us</h3>
-          <ul className="space-y-3 text-gray-700">
+          <h3 className="text-base sm:text-lg font-bold mb-4 text-gray-800">Contact Us</h3>
+          <ul className="space-y-3 text-gray-700 text-sm sm:text-base">
             <li className="flex items-center gap-3">
-              <MapPin className="w-5 h-5 text-gray-800" />
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800 flex-shrink-0" />
               <span>Toronto, Canada</span>
             </li>
             <li className="flex items-center gap-3">
-              <Phone className="w-5 h-5 text-gray-800" />
-              <a href="tel:+14164325568" className="hover:text-cream transition-all">
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800 flex-shrink-0" />
+              <a href="tel:+14164325568" className="hover:text-cream transition-all break-all">
                 +1 (416) 432‑5568
               </a>
             </li>
             <li className="flex items-center gap-3">
-              <Mail className="w-5 h-5 text-gray-800" />
-              <a href="mailto:funcareinstitute@gmail.com" className="hover:text-cream transition-all">
+              <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800 flex-shrink-0" />
+              <a href="mailto:funcareinstitute@gmail.com" className="hover:text-cream transition-all break-all">
                 funcareinstitute@gmail.com
               </a>
             </li>
@@ -134,34 +166,34 @@ export default function Footer() {
         {/* Newsletter */}
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className="bg-white/15 backdrop-blur-md p-6 rounded-2xl shadow-lg flex flex-col justify-between w-[140%] -ml-[7%]"
+          className="bg-white/15 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-lg flex flex-col justify-between sm:col-span-2 lg:col-span-1 overflow-hidden"
         >
-          <h3 className="text-lg font-bold mb-3 text-gray-800">Stay Connected</h3>
-          <p className="text-gray-700 mb-4">
+          <h3 className="text-base sm:text-lg font-bold mb-3 text-gray-800">Stay Connected</h3>
+          <p className="text-gray-700 mb-4 text-sm sm:text-base">
             Join our community for tips, resources, and updates!
           </p>
           <form
-  onSubmit={async (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const email = e.target.email.value;
 
-    const res = await fetch("http://localhost:5001/api/subscribe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
+              const res = await fetch("http://localhost:5001/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+              });
 
-    const data = await res.json();
-    alert(data.message);
-    e.target.reset();
-  }}
-  className="flex flex-col sm:flex-row gap-4"
->
+              const data = await res.json();
+              alert(data.message);
+              e.target.reset();
+            }}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 min-w-0"
+          >
             <input
               name="email"
-  type="email"
-  placeholder="Your email"
-              className="flex-grow px-4 py-3 rounded-md border border-gray-700 bg-transparent text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-700"
+              type="email"
+              placeholder="Your email"
+              className="flex-1 min-w-0 px-3 sm:px-4 py-2 sm:py-3 rounded-md border border-gray-700 bg-transparent text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-700 text-sm sm:text-base"
             />
             <motion.button
               whileHover={{
@@ -172,13 +204,16 @@ export default function Footer() {
               }}
               whileTap={{ scale: 0.96 }}
               className="
-                px-6 py-3
+                px-4 sm:px-5 py-2 sm:py-3
                 rounded-md
                 border border-gray-700
                 text-gray-800
                 font-semibold
                 bg-transparent
                 transition-all duration-300
+                text-sm sm:text-base
+                whitespace-nowrap
+                flex-shrink-0
               "
             >
               Subscribe
@@ -193,13 +228,13 @@ export default function Footer() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 1 }}
         viewport={{ once: true }}
-        className="relative z-10 max-w-7xl mx-auto px-6 mt-16 border-t border-gray-600 pt-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-700"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 mt-12 sm:mt-16 border-t border-gray-600 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-sm text-gray-700 gap-4"
       >
-        <p>
+        <p className="text-center sm:text-left">
           © {new Date().getFullYear()}{" "}
           <span className="font-semibold text-gray-800">FUN CARE INSTITUTE</span>. All Rights Reserved.
         </p>
-        <div className="flex space-x-6 mt-4 md:mt-0">
+        <div className="flex space-x-4 sm:space-x-6">
           <a href="#" className="hover:text-cream transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-cream transition-colors">Terms of Service</a>
         </div>
