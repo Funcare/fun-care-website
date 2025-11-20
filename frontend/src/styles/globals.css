@@ -78,3 +78,43 @@ body {
 .section-bg-yellow {
   background-color: #FFD166; /* yellow */
 }
+
+.section-bg-lavender {
+  background-color: #C8A8E9; /* lavender */
+}
+
+.section-bg-mint {
+  background-color: #A8E6CF; /* mint */
+}
+
+.section-bg-rose {
+  background-color: #F4A5AE; /* rose */
+}
+
+.section-bg-sky {
+  background-color: #A8D5E2; /* sky blue */
+}
+
+.section-bg-apricot {
+  background-color: #FFB88C; /* apricot */
+}
+
+.section-bg-sage {
+  background-color: #B8C5A6; /* sage green */
+}
+
+.section-bg-lilac {
+  background-color: #D4B3E8; /* lilac */
+}
+
+.section-bg-sand {
+  background-color: #E8D5B7; /* sand */
+}
+
+.section-bg-blush {
+  background-color: #F5C2C7; /* blush */
+}
+
+.section-bg-aqua {
+  background-color: #9DD9D2; /* aqua */
+}

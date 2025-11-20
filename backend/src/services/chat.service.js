@@ -164,13 +164,46 @@ const buildSemanticContext = async (message) => {
 
     return contextText;
   } catch (err) {
-    console.error("Semantic search error:", err);
+    // Gracefully handle quota/rate limit errors - chat will still work without semantic search
+    if (err.status === 429 || err.code === 'insufficient_quota') {
+      console.warn("Semantic search unavailable (quota exceeded). Chat will continue without enhanced context.");
+    } else {
+      console.error("Semantic search error:", err);
+    }
     return "";
   }
 };
 
+// Detect if user wants to book a meeting
+const detectBookingIntent = (message) => {
+  const text = message.toLowerCase();
+  const bookingKeywords = [
+    "book",
+    "schedule",
+    "meeting",
+    "appointment",
+    "consultation",
+    "call",
+    "talk",
+    "discuss",
+    "meet",
+    "set up",
+    "arrange",
+    "reserve",
+    "availability",
+    "when can we",
+    "i'd like to",
+    "i want to",
+    "can we",
+    "would like to",
+  ];
+  
+  return bookingKeywords.some((keyword) => text.includes(keyword));
+};
+
 export const askAI = async (message) => {
   try {
+    const hasBookingIntent = detectBookingIntent(message);
     const programRecs = getProgramRecommendations(message);
     const semanticContext = await buildSemanticContext(message);
 
@@ -186,6 +219,16 @@ export const askAI = async (message) => {
           )
           .join("\n") +
         "\n\nWhen you mention them, briefly explain why they might help. Do NOT include any links.\n";
+    }
+
+    // Add booking context if intent detected
+    let bookingContext = "";
+    if (hasBookingIntent) {
+      bookingContext =
+        "\n\nIMPORTANT: The user appears to want to book a meeting or schedule a consultation. " +
+        "In your response, acknowledge their interest warmly and let them know they can book a meeting. " +
+        "At the end of your response, include the token [BOOK_MEETING] to trigger the booking form. " +
+        "Do NOT mention the token explicitly - it will be handled automatically by the system.\n";
     }
 
     const completion = await openai.chat.completions.create({
@@ -401,6 +444,9 @@ The assistant must consistently embody this FunCare voice in all responses.
         ...(recommendationContext
           ? [{ role: "system", content: recommendationContext }]
           : []),
+        ...(bookingContext
+          ? [{ role: "system", content: bookingContext }]
+          : []),
         { role: "user", content: message },
       ],
     });
@@ -431,6 +477,11 @@ The assistant must consistently embody this FunCare voice in all responses.
       } else {
         reply = replaced;
       }
+    }
+
+    // Add booking token if booking intent detected
+    if (hasBookingIntent && !reply.includes("[BOOK_MEETING]")) {
+      reply = reply + "\n\n[BOOK_MEETING]";
     }
 
     return reply;

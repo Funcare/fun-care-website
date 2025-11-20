@@ -5,14 +5,18 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "seed:programs": "node src/scripts/seedPrograms.js",
+    "create:admin": "node src/scripts/createAdmin.js"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
     "axios": "^1.13.2",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.8.7",
     "openai": "^6.9.0",
     "resend": "^6.4.2"

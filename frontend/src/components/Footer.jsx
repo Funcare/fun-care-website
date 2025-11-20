@@ -149,12 +149,6 @@ export default function Footer() {
               <span>Toronto, Canada</span>
             </li>
             <li className="flex items-center gap-3">
-              <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800 flex-shrink-0" />
-              <a href="tel:+14164325568" className="hover:text-cream transition-all break-all">
-                +1 (416) 432‑5568
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
               <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800 flex-shrink-0" />
               <a href="mailto:funcareinstitute@gmail.com" className="hover:text-cream transition-all break-all">
                 funcareinstitute@gmail.com
@@ -237,6 +231,7 @@ export default function Footer() {
         <div className="flex space-x-4 sm:space-x-6">
           <a href="#" className="hover:text-cream transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-cream transition-colors">Terms of Service</a>
+          <a href="/admin/login" className="hover:text-cream transition-colors">Admin</a>
         </div>
       </motion.div>
     </footer>

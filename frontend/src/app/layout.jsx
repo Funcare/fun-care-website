@@ -5,11 +5,19 @@ import ChatWidget from "../components/AIChatWidget";
 export const metadata = {
   title: "FunCare Institute",
   description: "Workplace Joy. Leadership with Heart.",
+  icons: {
+    icon: "/icons/WebsiteLogo.png",
+    shortcut: "/icons/WebsiteLogo.png",
+    apple: "/icons/WebsiteLogo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icons/WebsiteLogo.png" />
+      </head>
       <body className="bg-cream text-teal font-sans antialiased overflow-x-hidden">
         {children}
 

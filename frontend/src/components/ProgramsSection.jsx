@@ -3,39 +3,26 @@ import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import Image from "next/image";
 import Link from "next/link";
-
-const programs = [
-  {
-    title: "Culture Shift Cafés",
-    desc: `Culture Shift Cafés are recurring, interactive sessions where leaders engage directly with the cultural frictions that can slow progress and strain team dynamics, including cross-cultural misunderstandings, multigenerational workstyle gaps, the remote–in-office divide, and departmental silos. Through facilitated knowledge exchange and experiential learning, leaders build cultural intelligence and create actionable strategies that improve communication, bridge workstyle gaps, and resolve conflicts. Each session equips leaders to unite teams around shared goals, boost employee engagement, and deliver stronger organizational outcomes.`,
-    color: "bg-coral",
-    icon: "/icons/CultureShiftCafes.png",
-    link: "/programs/culture-shift-cafes",
-  },
-  {
-    title: "Beats in the Boardroom",
-    desc: `Beats in the Boardroom and Beyond is an interactive workplace learning experience that blends music, visual art, storytelling, and other expressive modalities to bridge cultural divides, spark curiosity, and build trust across team differences. Through exploring cultural teachings and traditions in creative and participatory ways, participants gain the competencies and skills to strengthen cultural literacy, enhancing their ability to understand, interpret, and work effectively across different cultural contexts.`,
-    color: "bg-teal",
-    icon: "/icons/BeatsintheBoardroom.png",
-    link: "/programs/beats-in-the-boardroom",
-  },
-  {
-    title: "Joy & Innovation Labs",
-    desc: `Joy & Innovation Labs are monthly, play-based learning sessions where employees use the science and practice of play to unlock creativity, experimentation, and collaboration in solving real workplace challenges. Through hands-on activities, gamified problem-solving, and imaginative scenarios, participants learn to break habitual thinking patterns and explore new possibilities. Supported by frameworks like Design Thinking and Agile Collaboration, the labs channel the energy of play into structured innovation that delivers tangible business results.`,
-    color: "bg-peach",
-    icon: "/icons/Joy&InnovationLabs.png",
-    link: "/programs/joy-and-innovation-labs",
-  },
-  {
-    title: "Courses",
-    desc: `Explore our expanding library of FunCare courses designed to deepen learning and sustain cultural transformation. From microlearning modules to immersive certification programs, our courses empower individuals and teams to build joy, trust, and innovation into everyday work life.`,
-    color: "bg-yellow",
-    icon: "/icons/courses.png",
-    link: "/courses",
-  },
-];
+import { useEffect, useState } from "react";
+import { fetchPrograms } from "../utils/api";
 
 export default function ProgramsSection() {
+  const [programs, setPrograms] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadPrograms = async () => {
+      try {
+        const data = await fetchPrograms();
+        setPrograms(data);
+      } catch (error) {
+        console.error("Error loading programs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadPrograms();
+  }, []);
   return (
     <section
       id="programs"
@@ -53,6 +40,7 @@ export default function ProgramsSection() {
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           opacity: 0.50,
+          zIndex: 1,
         }}
       ></div>
       <style jsx>{`
@@ -101,7 +89,7 @@ export default function ProgramsSection() {
       `}</style>
 
       {/* header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center mb-10 sm:mb-12 md:mb-16">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 text-center mb-10 sm:mb-12 md:mb-16">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 text-gray-800 drop-shadow-sm">
           Our Programs
         </h2>
@@ -112,13 +100,22 @@ export default function ProgramsSection() {
       </div>
 
       {/* 2×2 grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto px-4 sm:px-6">
-        {programs.map((p, i) => (
-          <Tilt key={i} tiltMaxAngleX={8} tiltMaxAngleY={8}>
+      <div className="relative z-20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-5xl mx-auto px-4 sm:px-6">
+        {loading ? (
+          <div className="col-span-2 text-center py-8">
+            <p className="text-gray-700">Loading programs...</p>
+          </div>
+        ) : programs.length === 0 ? (
+          <div className="col-span-2 text-center py-8">
+            <p className="text-gray-700">No programs available at the moment.</p>
+          </div>
+        ) : (
+          programs.map((p, i) => (
+          <Tilt key={i} tiltMaxAngleX={8} tiltMaxAngleY={8} className="relative z-20">
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 180 }}
-              className={`${p.color} p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl flex flex-col justify-between transition-all`}
+              className={`relative z-20 ${p.color} p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl flex flex-col justify-between transition-all`}
             >
               <div>
                 <div className="flex justify-center mb-3 sm:mb-4">
@@ -134,7 +131,7 @@ export default function ProgramsSection() {
                   {p.title}
                 </h3>
                 <p className="text-xs sm:text-sm opacity-90 leading-relaxed text-center text-gray-700">
-                  {p.desc}
+                  {p.shortDescription || p.description}
                 </p>
               </div>
 
@@ -164,7 +161,8 @@ export default function ProgramsSection() {
               </div>
             </motion.div>
           </Tilt>
-        ))}
+          ))
+        )}
       </div>
     </section>
   );

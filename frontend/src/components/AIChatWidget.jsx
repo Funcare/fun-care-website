@@ -1,13 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle, X, Calendar, Clock, User, Mail, Phone, Building } from "lucide-react";
+import { bookMeeting } from "../utils/api";
 
 export default function AIChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showBookingForm, setShowBookingForm] = useState(false);
+  const [bookingLoading, setBookingLoading] = useState(false);
+  const [bookingForm, setBookingForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    preferredDate: "",
+    preferredTime: "",
+    meetingType: "consultation",
+    message: "",
+  });
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -26,8 +39,17 @@ export default function AIChatWidget() {
 
       const data = await res.json();
 
-      const aiMessage = { sender: "ai", text: data.reply };
+      // Check if reply contains booking token
+      const hasBookingToken = data.reply.includes("[BOOK_MEETING]");
+      const cleanReply = data.reply.replace("[BOOK_MEETING]", "").trim();
+
+      const aiMessage = { sender: "ai", text: cleanReply, showBookingForm: hasBookingToken };
       setMessages((prev) => [...prev, aiMessage]);
+      
+      // Show booking form if token detected
+      if (hasBookingToken) {
+        setShowBookingForm(true);
+      }
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -36,6 +58,55 @@ export default function AIChatWidget() {
     }
 
     setLoading(false);
+  };
+
+  const handleBookingSubmit = async (e) => {
+    e.preventDefault();
+    setBookingLoading(true);
+
+    try {
+      await bookMeeting(bookingForm);
+      
+      // Add success message
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "ai",
+          text: "Thank you! Your meeting request has been submitted successfully. Our team will reach out to you soon to confirm the details.",
+        },
+      ]);
+      
+      // Reset form and hide it
+      setBookingForm({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        preferredDate: "",
+        preferredTime: "",
+        meetingType: "consultation",
+        message: "",
+      });
+      setShowBookingForm(false);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "ai",
+          text: "I apologize, but there was an error submitting your booking request. Please try again or contact us directly at funcareinstitute@gmail.com",
+        },
+      ]);
+    } finally {
+      setBookingLoading(false);
+    }
+  };
+
+  const handleBookingFormChange = (e) => {
+    const { name, value } = e.target;
+    setBookingForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
@@ -103,7 +174,7 @@ export default function AIChatWidget() {
             : "bg-white text-gray-800 border border-gray-300"
         }`}
       >
-        {/* INLINE BUTTON SUPPORT */}
+          {/* INLINE BUTTON SUPPORT */}
         {(() => {
           // If there is a token, split the text into segments around it
           if (buttonPath) {
@@ -136,6 +207,17 @@ export default function AIChatWidget() {
             </div>
           );
         })()}
+        
+        {/* Show booking form button if message has booking intent */}
+        {msg.showBookingForm && !showBookingForm && (
+          <button
+            onClick={() => setShowBookingForm(true)}
+            className="mt-2 bg-gradient-to-r from-coral to-peach text-white px-3 py-2 rounded-lg shadow hover:opacity-90 transition text-xs sm:text-sm flex items-center gap-2"
+          >
+            <Calendar size={14} />
+            Book a Meeting
+          </button>
+        )}
       </div>
     );
   })}
@@ -144,6 +226,167 @@ export default function AIChatWidget() {
     <div className="text-gray-500 text-xs sm:text-sm italic">AI is typing…</div>
   )}
 </div>
+
+          {/* Booking Form */}
+          {showBookingForm && (
+            <div className="p-3 sm:p-4 bg-white border-t border-gray-300 max-h-96 overflow-y-auto">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="font-semibold text-sm sm:text-base text-gray-800 flex items-center gap-2">
+                  <Calendar size={16} />
+                  Book a Meeting
+                </h3>
+                <button
+                  onClick={() => setShowBookingForm(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              
+              <form onSubmit={handleBookingSubmit} className="space-y-3">
+                <div>
+                  <label className="block text-xs text-gray-700 mb-1 flex items-center gap-1">
+                    <User size={12} />
+                    Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={bookingForm.name}
+                    onChange={handleBookingFormChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-coral focus:border-transparent"
+                    placeholder="Your full name"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs text-gray-700 mb-1 flex items-center gap-1">
+                    <Mail size={12} />
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={bookingForm.email}
+                    onChange={handleBookingFormChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-coral focus:border-transparent"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs text-gray-700 mb-1 flex items-center gap-1">
+                    <Phone size={12} />
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={bookingForm.phone}
+                    onChange={handleBookingFormChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-coral focus:border-transparent"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs text-gray-700 mb-1 flex items-center gap-1">
+                    <Building size={12} />
+                    Company
+                  </label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={bookingForm.company}
+                    onChange={handleBookingFormChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-coral focus:border-transparent"
+                    placeholder="Your company name"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-xs text-gray-700 mb-1 flex items-center gap-1">
+                      <Calendar size={12} />
+                      Date *
+                    </label>
+                    <input
+                      type="date"
+                      name="preferredDate"
+                      value={bookingForm.preferredDate}
+                      onChange={handleBookingFormChange}
+                      required
+                      min={new Date().toISOString().split('T')[0]}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-coral focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs text-gray-700 mb-1 flex items-center gap-1">
+                      <Clock size={12} />
+                      Time *
+                    </label>
+                    <select
+                      name="preferredTime"
+                      value={bookingForm.preferredTime}
+                      onChange={handleBookingFormChange}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-coral focus:border-transparent"
+                    >
+                      <option value="">Select time</option>
+                      <option value="09:00">9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                      <option value="12:00">12:00 PM</option>
+                      <option value="13:00">1:00 PM</option>
+                      <option value="14:00">2:00 PM</option>
+                      <option value="15:00">3:00 PM</option>
+                      <option value="16:00">4:00 PM</option>
+                      <option value="17:00">5:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs text-gray-700 mb-1">Meeting Type *</label>
+                  <select
+                    name="meetingType"
+                    value={bookingForm.meetingType}
+                    onChange={handleBookingFormChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-coral focus:border-transparent"
+                  >
+                    <option value="consultation">Consultation</option>
+                    <option value="program-inquiry">Program Inquiry</option>
+                    <option value="custom-workshop">Custom Workshop</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs text-gray-700 mb-1">Message</label>
+                  <textarea
+                    name="message"
+                    value={bookingForm.message}
+                    onChange={handleBookingFormChange}
+                    rows={3}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-coral focus:border-transparent"
+                    placeholder="Tell us what you'd like to discuss..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={bookingLoading}
+                  className="w-full bg-gradient-to-r from-coral to-peach text-white py-2 rounded-lg hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm font-semibold"
+                >
+                  {bookingLoading ? "Submitting..." : "Submit Booking Request"}
+                </button>
+              </form>
+            </div>
+          )}
 
           {/* Input */}
           <div className="p-2 sm:p-3 border-t border-gray-300 flex gap-2 bg-white rounded-b-2xl">
