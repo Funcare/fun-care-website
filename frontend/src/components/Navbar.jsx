@@ -15,7 +15,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = ["About", "Programs", "Resources", "Contact"];
+  const navItems = [
+    { name: "About", href: "#about" },
+    { name: "Programs", href: "#programs" },
+    { name: "Resources", href: "/resources" },  // ✔ SAYFAYA GİDER
+    { name: "Contact", href: "/contact" }       // ✔ SAYFAYA GİDER
+  ];
 
   return (
     <motion.nav
@@ -28,37 +33,30 @@ export default function Navbar() {
           : "border-b border-transparent"
       }`}
       style={{
-        background:
-          "linear-gradient(90deg, #FFF4E3, #E59BAA, #FFF4E3)",
+        background: "linear-gradient(90deg, #FFF4E3, #E59BAA, #FFF4E3)"
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
-        {/* Left: Logo + Name */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* Logo */}
+        <div className="flex items-center gap-3">
           <Image
             src={Logo}
             alt="FunCare Logo"
             width={60}
             height={60}
-            className="rounded-full sm:w-20 sm:h-20"
+            className="rounded-full"
           />
-          <h1
-            className="text-lg sm:text-xl md:text-2xl font-medium text-gray-800 tracking-tight uppercase"
-            style={{ fontFamily: "'Turret Road', sans-serif" }}
-          >
+          <h1 className="text-xl font-medium text-gray-800 uppercase">
             Fun Care Institute.
           </h1>
         </div>
 
-        {/* Desktop Navigation Links */}
-        <ul className="hidden md:flex space-x-6 lg:space-x-10 text-gray-800 font-medium">
+        {/* Desktop Nav */}
+        <ul className="hidden md:flex space-x-8 text-gray-800 font-medium">
           {navItems.map((item) => (
-            <motion.li key={item} whileHover={{ scale: 1.1 }}>
-              <a
-                href={`#${item.toLowerCase()}`}
-                className="hover:text-[#E59BAA] transition-colors relative"
-              >
-                {item}
+            <motion.li key={item.name} whileHover={{ scale: 1.1 }}>
+              <a href={item.href} className="hover:text-[#E59BAA] transition">
+                {item.name}
               </a>
             </motion.li>
           ))}
@@ -67,8 +65,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-gray-800 hover:text-[#E59BAA] transition-colors"
-          aria-label="Toggle menu"
+          className="md:hidden p-2 text-gray-800"
         >
           {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -81,18 +78,17 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden border-t border-white/40"
+            className="md:hidden border-t border-white/40"
           >
             <ul className="px-4 py-4 space-y-4 text-gray-800 font-medium">
               {navItems.map((item) => (
-                <li key={item}>
+                <li key={item.name}>
                   <a
-                    href={`#${item.toLowerCase()}`}
+                    href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2 hover:text-[#E59BAA] transition-colors text-lg"
+                    className="block py-2 hover:text-[#E59BAA] text-lg"
                   >
-                    {item}
+                    {item.name}
                   </a>
                 </li>
               ))}
