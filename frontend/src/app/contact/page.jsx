@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 bg-gradient-to-br from-[#90B7B3] via-[#FFF4E3] to-[#E59BAA] text-gray-800">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+    <main className="min-h-screen pt-24 pb-20 bg-gradient-to-br from-[#90B7B3] via-[#FFF4E3] to-[#E59BAA] text-gray-800">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
 
         {/* Breadcrumb */}
         <div className="mb-6 text-xs sm:text-sm text-gray-700">
@@ -14,63 +15,120 @@ export default function ContactPage() {
           <span className="font-semibold">Contact</span>
         </div>
 
+        {/* Header */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl font-extrabold mb-4"
+          className="text-3xl sm:text-4xl font-extrabold mb-6"
         >
           Contact Us
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
-          className="text-base sm:text-lg leading-relaxed mb-8 text-gray-700"
+        {/* Form Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white/80 border border-gray-200 rounded-2xl p-6 shadow-lg mb-12"
         >
-          We're here to support you. Connect with us for questions, partnerships,
-          or collaboration opportunities.
-        </motion.p>
+          <h2 className="text-xl font-semibold mb-4">Send Us a Message</h2>
 
-        {/* Contact Form */}
-        <div className="bg-white/80 border border-gray-200 rounded-xl p-6 shadow-sm mb-10">
-          <h2 className="text-xl font-semibold mb-4">Send us a message</h2>
-
-          <form className="grid gap-4">
+          <form action="/api/sendEmail" method="POST" className="space-y-4">
             <input
               type="text"
+              name="name"
+              required
               placeholder="Your Name"
-              className="w-full p-3 border rounded-lg bg-gray-50"
+              className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#90B7B3]"
             />
+
             <input
               type="email"
+              name="email"
+              required
               placeholder="Your Email"
-              className="w-full p-3 border rounded-lg bg-gray-50"
+              className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#90B7B3]"
             />
-            <textarea
-              rows="4"
-              placeholder="Your Message"
-              className="w-full p-3 border rounded-lg bg-gray-50"
-            ></textarea>
 
-            <button className="px-6 py-3 rounded-lg bg-[#E59BAA] text-white font-semibold hover:bg-[#d78799] transition">
+            <textarea
+              name="message"
+              required
+              rows="5"
+              placeholder="Your Message..."
+              className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#90B7B3]"
+            />
+
+            <button
+              type="submit"
+              className="w-full py-3 rounded-lg bg-[#90B7B3] hover:bg-[#7DA6A1] text-white font-semibold transition shadow-md"
+            >
               Send Message
             </button>
           </form>
-        </div>
+        </motion.div>
 
         {/* Social Media Section */}
-        <div className="bg-white/80 border border-gray-200 rounded-xl p-6 shadow-sm">
-          <h2 className="text-xl font-semibold mb-4">Social Media</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="bg-white/80 border border-gray-200 rounded-2xl p-6 shadow-lg"
+        >
+          <h2 className="text-xl font-semibold mb-4">Stay Connected With FunCare</h2>
 
-          <ul className="space-y-3 text-gray-700">
-            <li>🎵 TikTok: <span className="font-semibold">@funcareinstitute</span></li>
-            <li>📸 Instagram: <span className="font-semibold">@funcareinstitute</span></li>
-            <li>🐦 Twitter: <span className="font-semibold">@funcareinst</span></li>
-            <li>📧 Email: <span className="font-semibold">funcareinstitute@gmail.com</span></li>
-          </ul>
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+
+            {/* TikTok */}
+            <a
+              href="https://tiktok.com/@funcareinstitute"
+              target="_blank"
+              className="flex flex-col items-center hover:scale-105 transition"
+            >
+              <Image
+                src="/icons/tiktok.png"
+                width={55}
+                height={55}
+                alt="TikTok"
+                className="drop-shadow-md"
+              />
+              <span className="mt-2 text-gray-700 font-medium">@funcareinstitute</span>
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://instagram.com/funcareinstitute"
+              target="_blank"
+              className="flex flex-col items-center hover:scale-105 transition"
+            >
+              <Image
+                src="/icons/instagram.png"
+                width={55}
+                height={55}
+                alt="Instagram"
+                className="drop-shadow-md"
+              />
+              <span className="mt-2 text-gray-700 font-medium">@funcareinstitute</span>
+            </a>
+
+            {/* Twitter */}
+            <a
+              href="https://twitter.com/funcareinst"
+              target="_blank"
+              className="flex flex-col items-center hover:scale-105 transition"
+            >
+              <Image
+                src="/icons/twitter.png"
+                width={55}
+                height={55}
+                alt="Twitter"
+                className="drop-shadow-md"
+              />
+              <span className="mt-2 text-gray-700 font-medium">@funcareinst</span>
+            </a>
+
+          </div>
+        </motion.div>
       </div>
     </main>
   );

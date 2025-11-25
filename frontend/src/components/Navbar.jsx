@@ -18,8 +18,8 @@ export default function Navbar() {
   const navItems = [
     { name: "About", href: "#about" },
     { name: "Programs", href: "#programs" },
-    { name: "Resources", href: "/resources" },  // ✔ SAYFAYA GİDER
-    { name: "Contact", href: "/contact" }       // ✔ SAYFAYA GİDER
+    { name: "Resources", href: "/resources" },  
+    { name: "Contact", href: "/contact" }       
   ];
 
   return (

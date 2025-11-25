@@ -122,23 +122,35 @@ export default function Footer() {
             ))}
           </div>
         </div>
-
+        
         {/* Quick Links */}
-        <div>
-          <h3 className="text-base sm:text-lg font-bold mb-4 text-gray-800">Quick Links</h3>
-          <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
-            {["About", "Programs", "Courses", "Resources", "Contact"].map((item) => (
-              <li key={item}>
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  className="hover:text-cream transition-all"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+<div>
+  <h3 className="text-base sm:text-lg font-bold mb-4 text-gray-800">Quick Links</h3>
+  <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
+
+    <li>
+      <a href="#about" className="hover:text-cream transition-all">About</a>
+    </li>
+
+    <li>
+      <a href="#programs" className="hover:text-cream transition-all">Programs</a>
+    </li>
+
+    <li>
+      <a href="/courses" className="hover:text-cream transition-all">Courses</a>
+    </li>
+
+    <li>
+      <a href="/resources" className="hover:text-cream transition-all">Resources</a>
+    </li>
+
+    <li>
+      <a href="/contact" className="hover:text-cream transition-all">Contact</a>
+    </li>
+
+  </ul>
+</div>
+
 
         {/* Contact */}
         <div>
